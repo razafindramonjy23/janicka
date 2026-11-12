@@ -1,26 +1,174 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ──────────────────────────────────────────────────────────────
+   Design tokens — romantic editorial palette
+   ────────────────────────────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-blush: #f4a6b8; /* primary pink */
+  --color-petal: #fce4ec; /* soft pink */
+  --color-cream: #fff8f7; /* light background */
+  --color-rose: #b4233a; /* deep romantic red */
+  --color-wine: #731d35; /* burgundy */
+  --color-ink: #38252b; /* main text */
+  --color-mute: #9a777f; /* muted — ornaments & large text only */
+  --color-mute-ink: #7e5a63; /* muted text, AA on cream / white */
+
+  --font-display: var(--ff-playfair), Georgia, serif;
+  --font-quote: var(--ff-cormorant), Georgia, serif;
+  --font-sans: var(--ff-dm-sans), system-ui, sans-serif;
+  --font-script: var(--ff-script), cursive;
+
+  --shadow-soft: 0 24px 60px -32px rgb(115 29 53 / 0.38);
+  --shadow-paper: 0 1px 2px rgb(56 37 43 / 0.06), 0 30px 70px -40px rgb(115 29 53 / 0.45);
+
+  --animate-heartbeat: heartbeat 2.4s ease-in-out infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@keyframes heartbeat {
+  0%, 60%, 100% { transform: scale(1); }
+  10% { transform: scale(1.18); }
+  20% { transform: scale(1); }
+  30% { transform: scale(1.12); }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Base
+   ────────────────────────────────────────────────────────────── */
+html {
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-petal);
+  color: var(--color-wine);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-rose);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Floating hearts / petals
+   ────────────────────────────────────────────────────────────── */
+.floater {
+  position: absolute;
+  bottom: -40px;
+  animation: float-up var(--dur, 18s) linear var(--delay, 0s) infinite;
+  will-change: transform;
+}
+
+@keyframes float-up {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(calc(var(--drift) * 0.6), -55vh, 0) rotate(calc(var(--spin) * 0.5)); }
+  100% { transform: translate3d(var(--drift), -115vh, 0) rotate(var(--spin)); }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Music equalizer
+   ────────────────────────────────────────────────────────────── */
+.equalizer {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+.equalizer > span {
+  width: 2px;
+  height: 30%;
+  border-radius: 2px;
+  background: var(--color-rose);
+  transition: height 0.3s ease;
+}
+.equalizer.is-playing > span { animation: eq 1s ease-in-out infinite; }
+.equalizer.is-playing > span:nth-child(2) { animation-delay: -0.35s; animation-duration: 0.8s; }
+.equalizer.is-playing > span:nth-child(3) { animation-delay: -0.6s; animation-duration: 1.15s; }
+.equalizer.is-playing > span:nth-child(4) { animation-delay: -0.15s; animation-duration: 0.9s; }
+
+@keyframes eq {
+  0%, 100% { height: 25%; }
+  50% { height: 100%; }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Scroll cue
+   ────────────────────────────────────────────────────────────── */
+.scroll-line {
+  position: relative;
+  display: block;
+  width: 1px;
+  height: 44px;
+  overflow: hidden;
+  background: rgb(154 119 127 / 0.25);
+}
+.scroll-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-rose);
+  animation: scroll-line 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes scroll-line {
+  0% { transform: translateY(-100%); }
+  60%, 100% { transform: translateY(100%); }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Letter paper
+   ────────────────────────────────────────────────────────────── */
+.paper {
+  background-color: #fffcf8;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.11 0 0 0 0 0.2 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, #fffdfa 0%, #fdf3ef 100%);
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Memories carousel — active slide in focus, others recede
+   ────────────────────────────────────────────────────────────── */
+.memories .swiper-wrapper {
+  align-items: center;
+}
+.memories .memory-card {
+  transform: scale(0.86);
+  opacity: 0.45;
+  filter: saturate(0.85);
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.8s ease;
+}
+.memories .swiper-slide-active .memory-card {
+  transform: scale(1);
+  opacity: 1;
+  filter: none;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Reduced motion
+   ────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .floaters,
+  .scroll-line::after {
+    display: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
