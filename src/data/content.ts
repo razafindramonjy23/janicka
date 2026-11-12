@@ -6,18 +6,21 @@
 
 export const site = {
   lang: "fr",
-  title: "Pour toi, mon amour",
+  title: "Pour toi, Janicka",
   description: "Quelques souvenirs, quelques mots et beaucoup d’amour — rien que pour toi.",
   /** Ton prénom, utilisé pour les signatures. */
   myName: "Tahina",
+  /** Son prénom et son surnom. */
+  herName: "Janicka",
+  herNicknames: ["Ja", "Jaja"],
   /** Petite étiquette de date dans la section d’anniversaire. */
   birthdayLabel: "12 · novembre · 2026",
   /** Date de notre rencontre (année, mois 1-12, jour) — sert au compteur de jours du hero. */
-  metOn: { year: 2026, month: 8, day: 7 },
+  metOn: { year: 2026, month: 7, day: 7 },
 };
 
 export const intro = {
-  label: "Une petite surprise pour toi",
+  label: "Une petite surprise pour toi, Jaja",
   heading: "Quelqu’un de spécial mérite quelque chose de",
   headingAccent: "spécial.",
   subtitle: "J’ai rassemblé quelques souvenirs, quelques mots et tout ce que je ressens, rien que pour toi.",
@@ -27,7 +30,7 @@ export const intro = {
 export const hero = {
   eyebrow: "Aujourd’hui, c’est ton jour",
   heading: "Joyeux anniversaire,",
-  headingAccent: "mon amour",
+  headingAccent: "Janicka",
   message:
     "Aujourd’hui, tout est pour toi : ton sourire, et toutes ces belles choses qui font de toi la personne que tu es.",
   image: "/images/hero.jpg",
@@ -35,7 +38,7 @@ export const hero = {
   imageCaption: "ma vue préférée",
   /** Compteur : « 97 jours » + cette phrase. */
   togetherUnit: "jours",
-  togetherLabel: "à tes côtés, depuis le 7\u00a0août\u00a02026",
+  togetherLabel: "à tes côtés, depuis le 7\u00a0juillet\u00a02026",
   cta: "Découvrir nos souvenirs",
 };
 
@@ -63,20 +66,23 @@ export const sections = {
   letter: {
     index: "04",
     eyebrow: "Une lettre",
-    title: "Quelques mots",
-    titleAccent: "venus du cœur.",
+    title: "À celle qui m’attendait",
+    titleAccent: "sans me connaître…",
   },
 };
 
 export const letter = {
-  greeting: "Mon amour,",
+  greeting: "Si seulement tu savais…",
   paragraphs: [
-    "Aujourd’hui, c’est ton jour, et je veux simplement que tu saches à quel point tu comptes pour moi.",
-    "Chaque souvenir que nous avons créé ensemble a une place toute particulière dans mon cœur.",
-    "Merci d’être toi, pour ton sourire, pour ta gentillesse, et pour tous ces petits moments qui rendent notre histoire unique.",
-    "J’espère que ce nouveau chapitre t’apportera du bonheur, de belles opportunités, et tout ce que ton cœur désire.",
+    "Pendant que tu écrivais ces mots, j’existais quelque part. Je ne savais même pas à quoi tu ressemblais, qui tu étais, ni même si nos chemins s’étaient déjà croisés sans que nous le sachions.",
+    "Tout ce que je savais, c’est que tu étais quelque part dans ce monde et que, tôt ou tard, je finirais par te trouver. Parce que c’est une rencontre que j’avais toujours demandée dans mes prières au Seigneur.",
+    "Tu te demandais où j’étais, si j’existais vraiment… Et aujourd’hui, je suis là.",
+    "Je ne vais pas prétendre être l’homme parfait que tu imaginais dans tes pensées à cette époque. J’ai mes faiblesses, mes peurs et mes imperfections. Mais je veux être celui qui te prouvera que tu n’as pas attendu pour rien.",
+    "J’aurais aimé pouvoir remonter le temps, te prendre dans mes bras au moment où tu écrivais cette lettre et te murmurer : « Patiente encore un peu, je suis quelque part, à quelques pas de chez toi, hihi… Et un jour, nos chemins finiront par se croiser. »",
+    "Je ne sais pas ce que l’avenir nous réserve, mais une chose est certaine : je remercie Dieu d’avoir permis à nos chemins de se rencontrer.",
+    "Et j’espère qu’un jour, nous aurons le bonheur de nous tenir côte à côte devant l’autel, entourés de nos familles, pour Le remercier ensemble de nous avoir réunis.",
   ],
-  closing: "Joyeux anniversaire, mon amour.",
+  closing: "Tu te demandais si j’existais vraiment… Aujourd’hui, j’aimerais être la réponse à toutes ces questions que tu te posais autrefois. ❤️",
   signOff: "À toi, pour toujours,",
 };
 

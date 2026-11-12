@@ -1,9 +1,9 @@
 "use client";
 
-import { animate, motion, useReducedMotion } from "framer-motion";
+import { animate, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, Heart } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { FloatingHearts } from "@/components/ui/FloatingHearts";
 import { hero, site, ui } from "@/data/content";
 import { EASE } from "@/lib/animations";
@@ -52,20 +52,54 @@ function useDaysCounter(active: boolean) {
   return value;
 }
 
+/** A one-off ring of tiny hearts bursting out of the title heart. */
+const BURST = Array.from({ length: 8 }, (_, i) => {
+  const angle = (i / 8) * Math.PI * 2 - Math.PI / 2;
+  const dist = i % 2 === 0 ? 1.15 : 0.85;
+  return { x: `${(Math.cos(angle) * dist).toFixed(3)}em`, y: `${(Math.sin(angle) * dist).toFixed(3)}em` };
+});
+
+function HeartBurst({ active, delay }: { active: boolean; delay: number }) {
+  const reduce = useReducedMotion();
+  if (reduce) return null;
+  return (
+    <span aria-hidden className="pointer-events-none absolute top-1/2 left-1/2">
+      {BURST.map((p, i) => (
+        <motion.span
+          key={i}
+          className="absolute -top-[0.07em] -left-[0.07em] text-blush"
+          initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
+          animate={active ? { x: p.x, y: p.y, scale: [0, 1, 0.6], opacity: [0, 1, 0] } : undefined}
+          transition={{ duration: 1.1, ease: EASE, delay: delay + (i % 2) * 0.06 }}
+        >
+          <Heart className="h-[0.14em] w-[0.14em]" fill="currentColor" strokeWidth={0} />
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
 export function BirthdayHero({ active }: BirthdayHeroProps) {
   const reduce = useReducedMotion();
   const days = useDaysCounter(active);
+
+  // Scroll parallax: portrait drifts up faster than the page, text eases away.
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const portraitY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, -110]);
+  const textY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, 60]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.75], [1, reduce ? 1 : 0.15]);
   const go = <T extends { animate: object }>(m: T) => ({ ...m, animate: active ? m.animate : undefined });
 
   const scrollToMemories = (e: MouseEvent<HTMLAnchorElement>) => {
     const target = document.getElementById("souvenirs");
     if (!target) return;
-    e.preventDefault();
     target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
   };
 
   return (
     <section
+      ref={sectionRef}
       aria-labelledby="hero-title"
       className="relative isolate flex min-h-svh items-center overflow-hidden px-5 pt-10 pb-24 sm:px-8 md:pt-20"
     >
@@ -81,7 +115,7 @@ export function BirthdayHero({ active }: BirthdayHeroProps) {
 
       <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-12 md:gap-8">
         {/* Text */}
-        <div className="md:col-span-6">
+        <motion.div style={{ y: textY, opacity: textOpacity }} className="md:col-span-6">
           <motion.p
             {...go(rise(0.3))}
             className="flex items-center gap-3 text-[0.7rem] font-medium uppercase tracking-[0.32em] text-mute-ink"
@@ -101,11 +135,12 @@ export function BirthdayHero({ active }: BirthdayHeroProps) {
               {hero.headingAccent}
               <motion.span
                 aria-hidden
-                className="ml-3 inline-block align-middle"
+                className="relative ml-3 inline-block align-middle"
                 initial={{ opacity: 0, scale: 0.4 }}
                 animate={active ? { opacity: 1, scale: 1 } : undefined}
                 transition={{ type: "spring", stiffness: 220, damping: 14, delay: 1.3 }}
               >
+                <HeartBurst active={active} delay={1.4} />
                 <Heart
                   className="h-[0.42em] w-[0.42em] animate-heartbeat text-rose"
                   fill="currentColor"
@@ -150,7 +185,7 @@ export function BirthdayHero({ active }: BirthdayHeroProps) {
               />
             </a>
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* Portrait — first on mobile so her photo is visible without scrolling */}
         <motion.div
@@ -159,7 +194,7 @@ export function BirthdayHero({ active }: BirthdayHeroProps) {
           animate={active ? { opacity: 1, scale: 1 } : undefined}
           transition={{ duration: 1.6, ease: EASE, delay: 0.2 }}
         >
-          <figure className="relative">
+          <motion.figure style={{ y: portraitY }} className="relative">
             <div aria-hidden className="absolute -inset-3 translate-x-3 translate-y-3 rounded-t-full border border-rose/25" />
             <div className="relative aspect-[3/4] overflow-hidden rounded-t-full bg-petal shadow-soft">
               <Image
@@ -174,7 +209,7 @@ export function BirthdayHero({ active }: BirthdayHeroProps) {
             <figcaption className="absolute -bottom-6 -left-6 rotate-[-5deg] rounded-full bg-cream px-5 py-1.5 font-script text-[1.6rem] leading-tight text-wine shadow-paper sm:-left-10 sm:text-[1.85rem]">
               {hero.imageCaption}
             </figcaption>
-          </figure>
+          </motion.figure>
         </motion.div>
       </div>
 

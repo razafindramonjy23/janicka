@@ -12,7 +12,7 @@ export interface TimelineEvent {
 export const timeline: TimelineEvent[] = [
   {
     id: 1,
-    date: "7 août 2026",
+    date: "7 juillet 2026",
     title: "Le jour de notre rencontre",
     description:
       "Je ne le savais pas encore, mais tout mon monde allait changer. Tu as souri, et quelque chose en moi a murmuré : c’est elle.",
@@ -21,26 +21,26 @@ export const timeline: TimelineEvent[] = [
   },
   {
     id: 2,
-    date: "Quelques semaines plus tard",
-    title: "Notre premier rendez-vous",
+    date: "8 août 2026",
+    title: "Tu es venue à mon concert",
     description:
-      "J’avais tellement le trac que j’en ai oublié ce que je voulais commander. Tu as ri, et plus rien d’autre ne comptait.",
+      "Un mois à peine après notre rencontre, tu étais là, dans le public. Parmi tous ces visages, c’est le tien que je cherchais — et chaque note, ce soir-là, avait un peu ton nom.",
   },
   {
     id: 3,
-    date: "Été 2026",
-    title: "Notre première aventure",
+    date: "9 août 2026",
+    title: "Notre première randonnée",
     description:
-      "Des mauvais virages, beaucoup trop de grignotages et le plus beau coucher de soleil. Je me perdrais avec toi n’importe où.",
+      "Des sentiers qui grimpent, des pauses pour reprendre notre souffle, et ton rire tout au long du chemin. Ce jour-là, j’ai su que je te suivrais n’importe où.",
     image: "/images/memory-01.jpg",
-    imageAlt: "Notre premier voyage ensemble",
+    imageAlt: "Notre randonnée ensemble",
   },
   {
     id: 4,
-    date: "Ce soir-là",
-    title: "Un moment que je n’oublierai jamais",
+    date: "8 novembre 2026",
+    title: "Prier ensemble",
     description:
-      "Tu m’as pris la main sans rien dire, et j’ai enfin compris ce que voulait dire « se sentir chez soi ».",
+      "Nos mains jointes, nos cœurs tournés dans la même direction. Ce moment-là m’a touché plus que je ne saurais le dire — merci à Dieu de t’avoir mise sur mon chemin.",
   },
   {
     id: 5,
