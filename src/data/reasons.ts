@@ -27,7 +27,8 @@ export const reasons: Reason[] = [
   {
     id: 4,
     title: "Ta façon de rendre chaque jour spécial",
-    message: "Une balade, un café, une soirée tranquille — avec toi, tout ressemble à une petite fête.",
+    message:
+      "Un composé avec des nems, une balade, une soirée tranquille — avec toi, tout ressemble à une petite fête.",
   },
   {
     id: 5,
