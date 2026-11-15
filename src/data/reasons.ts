@@ -21,7 +21,8 @@ export const reasons: Reason[] = [
   {
     id: 3,
     title: "Ta gentillesse",
-    message: "Tu prends soin des autres d’une façon qui rend le monde entier plus doux autour de toi.",
+    message:
+      "Tu me gardes toujours ces petits biscuits que j’aime tant — et c’est dans ces petites attentions, bien plus que dans les grandes, que je te reconnais.",
   },
   {
     id: 4,
