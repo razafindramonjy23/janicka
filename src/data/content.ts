@@ -34,7 +34,7 @@ export const hero = {
   message:
     "Aujourd’hui, tout est pour toi : ton sourire, et toutes ces belles choses qui font de toi la personne que tu es.",
   image: "/images/hero.jpg",
-  imageAlt: "Ton portrait, tout sourire",
+  imageAlt: "Toi, en robe jaune, face à la mer",
   imageCaption: "ma vue préférée",
   /** Compteur : « 97 jours » + cette phrase. */
   togetherUnit: "jours",
@@ -92,7 +92,7 @@ export const finalSurprise = {
   hint: "Respire un grand coup. Prête ?",
   cta: "Ouvre ta dernière surprise",
   image: "/images/final-photo.jpg",
-  imageAlt: "Nous deux, ensemble",
+  imageAlt: "Notre collage « Toi & Moi » : trois photos de nous, avec quelques mots écrits à la main",
   photoCaption: "toi & moi, toujours",
   message: ["Si je pouvais choisir à nouveau, dans chaque vie,", "je te choisirais encore."],
   closing: "Joyeux anniversaire, mon amour.",

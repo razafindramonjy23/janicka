@@ -128,6 +128,7 @@ function TimelineItem({ event, side }: { event: TimelineEvent; side: "left" | "r
                 alt={event.imageAlt ?? event.title}
                 fill
                 sizes="(max-width: 768px) 80vw, 384px"
+                style={event.focus ? { objectPosition: event.focus } : undefined}
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
               />
             </motion.div>

@@ -85,14 +85,14 @@ export function FinalSurprise() {
                   hidden: { opacity: 0, y: 40, rotate: 6, scale: 0.9 },
                   show: { opacity: 1, y: 0, rotate: -2, scale: 1, transition: { duration: 1.4, ease: EASE } },
                 }}
-                className="w-[68vw] max-w-[300px] bg-white p-3 pb-12 shadow-[0_30px_60px_-25px_rgba(0,0,0,0.6)]"
+                className="w-[86vw] max-w-[420px] bg-white p-3 pb-12 shadow-[0_30px_60px_-25px_rgba(0,0,0,0.6)]"
               >
-                <div className="relative aspect-[4/5] overflow-hidden bg-petal">
+                <div className="relative aspect-[1214/1295] overflow-hidden bg-petal">
                   <Image
                     src={finalSurprise.image}
                     alt={finalSurprise.imageAlt}
                     fill
-                    sizes="300px"
+                    sizes="(max-width: 520px) 86vw, 420px"
                     className="object-cover"
                   />
                 </div>
